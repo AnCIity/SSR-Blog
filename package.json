@@ -1,0 +1,28 @@
+{
+  "name": "SSR-Blog",
+  "version": "1.0.0",
+  "description": "SSR博客管理系统",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnCIity/SSR-Blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnCIity/SSR-Blog/issues"
+  },
+  "homepage": "https://github.com/AnCIity/SSR-Blog#readme",
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "express": "^4.17.1",
+    "express-art-template": "^1.0.1",
+    "mongoose": "^5.9.5"
+  }
+}
