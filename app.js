@@ -5,19 +5,25 @@ const express = require("express");
 const path = require("path");
 
 // 引入 morgan 日志管理模块
-var logger = require("morgan");
+const morgan = require("morgan");
 
-// 导入 express-session 模块
+// 导入 express-session session管理模块
 const session = require("express-session");
+
+// 导入 art-template 模板引擎
+const template = require("art-template");
+
+// 导入 dateformat 时间处理模块
+const dateFormat = require("dateformat");
+
+// 导入 config 配置管理模块
+const config = require("config");
 
 // 创建网站服务器
 const app = express();
 
 // 数据库连接
 require("./model/connect");
-
-// 记录日志
-app.use(logger("dev"));
 
 // 处理 get 请求参数
 app.use(express.json());
@@ -34,9 +40,22 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "art");
 // 选用的模板引擎
 app.engine("art", require("express-art-template"));
+// 向模板内部导入 dateFormat 变量
+template.defaults.imports.dateFormat = dateFormat;
 
 // 开放静态资源
 app.use(express.static(path.join(__dirname, "public")));
+
+config.get("title");
+
+// 获取系统环境变量，返回值为对象
+if (process.env.NODE_ENV == "development") {
+    // 开发环境
+    // 在开发环境中将服务端请求信息打印到终端
+    app.use(morgan("dev"));
+} else {
+    // 生成环境
+}
 
 // 引入路由模块
 const adminRoute = require("./route/admin");
